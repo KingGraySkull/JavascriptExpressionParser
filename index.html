@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "utf-8">
+    <title>Expression Parser</title>
+    <script src = "stack.js"></script>
+    <script src = "parser.js"></script>
+    <style>
+        #expressionField
+        {
+            display:block;
+            width:350px;
+            font-size:1.2em;
+            margin-left:auto;
+            margin-right:auto;
+            padding:0.2em;
+        }
+        
+        #container {
+            width:800px;
+            margin-top:50px;
+            margin-left:auto;
+            margin-right:auto;
+            overflow:hidden;
+        }
+        
+        #output
+        {
+            width:800px;
+            font-size:1.4em;
+            text-align:center;
+        }
+    </style>
+</head>
+ 
+<body>
+    <div>
+        <input id = "expressionField" type = "text" placeholder = "Enter Some Expression 2*2+(2^4)">
+    </div>
+    <div id = "container">
+        <p id = "output"></p>
+    </div>
+</body>
+
+<script>
+    var txtField = document.getElementById("expressionField");
+    var output = document.getElementById("output");
+    var outputText = "";
+    
+    function display(e)
+    {
+        if(txtField.value.length >= 1)
+        {
+            var result = parser(txtField.value);
+                if(Number.isNaN(result))
+                {
+                    result = " ";
+                    outputText = txtField.value+" = "+result;
+                    output.innerHTML = outputText;
+                }
+                else 
+                {
+                    outputText = txtField.value+" = "+result;
+                    output.innerHTML = outputText;
+                }
+        }
+        else
+        {
+            output.innerHTML = "";    
+        }
+    }
+    
+    txtField.addEventListener("keyup",display,false);
+</script>
+</html>
